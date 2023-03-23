@@ -1,3 +1,7 @@
 <resources>
-    <string name="app_name">CountryQuiz</string>
+    <string name="app_name">Country Quiz</string>
+
+    <string name="rules">Hi, Welcome to the app! Here you can test your knowledge of countries and continents. Start a new quiz and find out if you know which continent each country is located in. You will have 6 questions to answer with 3 options to choose from. Only one answer is correct. After you are done taking the quiz, you will see how well you did. As you continue to take more and more quizzes, you can look at your previous quizzes and check how well you are progressing by clicking on the View Past Quizzes button. Good luck!</string>
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+
 </resources>
