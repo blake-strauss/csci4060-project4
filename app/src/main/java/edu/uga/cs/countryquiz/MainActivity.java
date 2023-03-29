@@ -4,13 +4,11 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.ContentValues;
 import android.content.Intent;
+import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
-import android.util.Log;
 import android.widget.Button;
 import com.opencsv.CSVReader;
-
-import java.io.File;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 
@@ -19,7 +17,6 @@ public class MainActivity extends AppCompatActivity {
 
     private Button button;
     CountriesDBHelper controller;
-    private static final String DB_PATH = "/data/data/edu.uga.cs.countryquiz/databases/countries.db";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,8 +29,12 @@ public class MainActivity extends AppCompatActivity {
         ContentValues values = new ContentValues();
         controller = CountriesDBHelper.getInstance(getApplicationContext());
         SQLiteDatabase db = controller.getWritableDatabase();
+        String count = "SELECT count(*) FROM Countries";
+        Cursor mcursor = db.rawQuery(count, null);
+        mcursor.moveToFirst();
+        int icount = mcursor.getInt(0);
         //inserts data into table only once
-        if (!databaseExist()) {
+        if (icount==0) {
             try {
                 db.beginTransaction();
                 // Open the CSV data file in the assets folder
@@ -62,10 +63,5 @@ public class MainActivity extends AppCompatActivity {
             Intent intent = new Intent(view.getContext(), QuizActivity.class);
             startActivity(intent);
         });
-    }
-    //method to check if database already exists
-    public boolean databaseExist() {
-        File dbFile = new File(DB_PATH + "countries.db");
-        return dbFile.exists();
     }
 }
