@@ -1,7 +1,6 @@
 package edu.uga.cs.countryquiz;
 
 import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.ContentValues;
 import android.content.Intent;
 import android.database.Cursor;
@@ -11,19 +10,23 @@ import android.widget.Button;
 import com.opencsv.CSVReader;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.util.ArrayList;
 
 
 public class MainActivity extends AppCompatActivity {
 
-    private Button button;
+    private Button button; //start a new quiz button
+    private Button button2; //previous quizzes button
     CountriesDBHelper controller;
+    public static final ArrayList<String> quizQuestions = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        button = findViewById(R.id.button2);
+        button = findViewById(R.id.quizButton);
+        button2 = findViewById(R.id.previousButton);
 
         //reads csv file and puts it into countries table
         ContentValues values = new ContentValues();
@@ -58,9 +61,27 @@ public class MainActivity extends AppCompatActivity {
                 e.printStackTrace();
             }
         }
+        //puts data of CSV file into ArrayList
+        try {
+            InputStream in_s = getAssets().open("country_continent.csv");
+            CSVReader reader = new CSVReader(new InputStreamReader(in_s));
+            String[] nextRow;
+            while ((nextRow = reader.readNext()) != null) {
+                for (int i = 0; i < nextRow.length; i++) {
+                    quizQuestions.add(nextRow[i]);
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         //takes user to the quiz from the splash screen
         button.setOnClickListener((view) -> {
             Intent intent = new Intent(view.getContext(), QuizActivity.class);
+            startActivity(intent);
+        });
+        //takes user to be able to see their previous quizzes
+        button2.setOnClickListener((view) -> {
+            Intent intent = new Intent(view.getContext(), PreviousActivity.class);
             startActivity(intent);
         });
     }
