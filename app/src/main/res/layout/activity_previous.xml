@@ -6,4 +6,34 @@
     android:layout_height="match_parent"
     tools:context=".PreviousActivity">
 
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerView"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginTop="24dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/quizDate"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="Quiz Date:"
+        android:textSize="16sp"
+        app:layout_constraintBaseline_toBaselineOf="@+id/quizResult"
+        app:layout_constraintEnd_toStartOf="@+id/quizResult"
+        app:layout_constraintHorizontal_chainStyle="spread"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <TextView
+        android:id="@+id/quizResult"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="Quiz Result:"
+        android:textSize="16sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/quizDate"
+        app:layout_constraintTop_toTopOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>

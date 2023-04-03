@@ -5,12 +5,6 @@ public class Quizzes {
     private String date;
     private String result;
 
-    public Quizzes() {
-        this.id = -1;
-        this.date = null;
-        this.result = null;
-    }
-
     public Quizzes( String date, String result) {
         this.id = -1;  // the primary key id will be set by a setter method
         this.date = date;
